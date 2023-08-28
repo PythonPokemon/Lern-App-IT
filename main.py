@@ -11,6 +11,12 @@ class LearningApp(App):
                 'choices': ['Paris', 'Berlin', 'Madrid', 'Rome'],
                 'correct_choice': 0
             },
+
+             {
+                'question': 'Was ist das beste RPG?',
+                'choices': ['PoE', 'Diablo 4', 'ESO', 'FF-Online'],
+                'correct_choice': 0
+            },
             # Add more questions here
         ]
         
