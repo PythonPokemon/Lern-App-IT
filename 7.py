@@ -74,12 +74,12 @@ class LearningApp(App):
                 'name': 'Lernfeld 3',
                 'questions': [
                     {
-                        'question': 'Frage 1 zu Lernfeld 2?',
+                        'question': 'Frage 1 zu Lernfeld 3?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 2
                     },
                     {
-                        'question': 'Frage 2 zu Lernfeld 2?',
+                        'question': 'Frage 2 zu Lernfeld 3?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 3
                     },
@@ -92,12 +92,12 @@ class LearningApp(App):
                 'name': 'Lernfeld 4',
                 'questions': [
                     {
-                        'question': 'Frage 1 zu Lernfeld 2?',
+                        'question': 'Frage 1 zu Lernfeld 4?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 2
                     },
                     {
-                        'question': 'Frage 2 zu Lernfeld 2?',
+                        'question': 'Frage 2 zu Lernfeld 4?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 3
                     },
@@ -110,12 +110,12 @@ class LearningApp(App):
                 'name': 'Lernfeld 5',
                 'questions': [
                     {
-                        'question': 'Frage 1 zu Lernfeld 2?',
+                        'question': 'Frage 1 zu Lernfeld 5?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 2
                     },
                     {
-                        'question': 'Frage 2 zu Lernfeld 2?',
+                        'question': 'Frage 2 zu Lernfeld 5?',
                         'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
                         'correct_choice': 3
                     },
