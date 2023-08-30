@@ -3,6 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.gridlayout import GridLayout
 
 # Beispieldaten für die Kategorien
 vocabulary = {
@@ -85,27 +86,12 @@ vocabulary = {
         ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
         ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
         ],
-
-     6: [
-        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
-        ],
 }
+
 
 class VocabularyApp(App):
     def build(self):
-        self.title = 'IT- Kompetenzcheck App'
+        self.title = 'IT- Kompetenzcheck '
         self.layout = BoxLayout(orientation='vertical')
         
         self.category_buttons = []
@@ -134,12 +120,13 @@ class VocabularyApp(App):
         self.layout.add_widget(category_label)
         
         scroll_view = ScrollView()
-        layout_inside_scroll = BoxLayout(orientation='vertical', spacing=10, padding=10)
+        layout_inside_scroll = GridLayout(cols=1, spacing=10, size_hint_y=None)
         
         for word, definition in vocabulary[category]:
             word_label = Label(text=f'{word}: {definition}', size_hint_y=None, height=40, valign='middle')
             layout_inside_scroll.add_widget(word_label)
         
+        layout_inside_scroll.bind(minimum_height=layout_inside_scroll.setter('height'))
         scroll_view.add_widget(layout_inside_scroll)
         self.layout.add_widget(scroll_view)
         
