@@ -2,159 +2,155 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from kivy.uix.spinner import Spinner
-from kivy.storage.jsonstore import JsonStore
+from kivy.uix.scrollview import ScrollView
 
-class LearningApp(App):
+# Beispieldaten für die Kategorien
+vocabulary = {
+    1: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+
+    2: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+
+    3: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+
+    4: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+
+    5: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+
+     6: [
+        ("Frage 1", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 2", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 3", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 4", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 5", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 6", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 7", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 8", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 9", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 10", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 11", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 12", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ("Frage 13", "Definition 1"), ("Praxis Tipp", "Beispiel"),
+        ],
+}
+
+class VocabularyApp(App):
     def build(self):
-        self.categories = [
-            {
-                'name': 'Lernfeld 1',
-                'questions': [
-                    {
-                        'question': 'Frage 1 zu Lernfeld 1?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 0
-                    },
-                    {
-                        'question': 'Frage 2 zu Lernfeld 1?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 1
-                    },
-                    # Add more questions for Lernfeld 1
-                ]
-            },
-            {
-                'name': 'Lernfeld 2',
-                'questions': [
-                    {
-                        'question': 'Frage 1 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 2
-                    },
-                    {
-                        'question': 'Frage 2 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 3
-                    },
-                    # Add more questions for Lernfeld 2
-                ]
-            },
-            # Add more categories here
-
-            {
-                'name': 'Lernfeld 3',
-                'questions': [
-                    {
-                        'question': 'Frage 1 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 2
-                    },
-                    {
-                        'question': 'Frage 2 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 3
-                    },
-                    # Add more questions for Lernfeld 2
-                ]
-            },
-            # Add more categories here
-
-            {
-                'name': 'Lernfeld 4',
-                'questions': [
-                    {
-                        'question': 'Frage 1 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 2
-                    },
-                    {
-                        'question': 'Frage 2 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 3
-                    },
-                    # Add more questions for Lernfeld 2
-                ]
-            },
-            # Add more categories here
-
-            {
-                'name': 'Lernfeld 5',
-                'questions': [
-                    {
-                        'question': 'Frage 1 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 2
-                    },
-                    {
-                        'question': 'Frage 2 zu Lernfeld 2?',
-                        'choices': ['Antwort 1', 'Antwort 2', 'Antwort 3', 'Antwort 4'],
-                        'correct_choice': 3
-                    },
-                    # Add more questions for Lernfeld 2
-                ]
-            },
-            # Add more categories here
-
-        ]
-
-        self.store = JsonStore('learning_app_store.json')
-        if 'current_category_index' in self.store:
-            self.current_category_index = self.store.get('current_category_index')['value']
-        else:
-            self.current_category_index = 0
-
-        self.current_question_index = 0
-        self.correct_answers = 0
+        self.title = 'IT- Kompetenzcheck App'
         self.layout = BoxLayout(orientation='vertical')
-
-        self.category_spinner = Spinner(text=self.categories[self.current_category_index]['name'], values=[category['name'] for category in self.categories], on_text=self.change_category)
-        self.layout.add_widget(self.category_spinner)
-
-        self.question_label = Label(text=self.categories[self.current_category_index]['questions'][self.current_question_index]['question'])
-        self.layout.add_widget(self.question_label)
-
-        self.choice_buttons = []
-        for i, choice in enumerate(self.categories[self.current_category_index]['questions'][self.current_question_index]['choices']):
-            button = Button(text=choice, on_release=self.check_answer)
-            self.choice_buttons.append(button)
+        
+        self.category_buttons = []
+        for category in range(1, 6):
+            button = Button(text=f'Lernfeld {category}', size_hint=(1, None), height=50)
+            button.bind(on_press=self.show_category_vocabulary)
+            self.category_buttons.append(button)
             self.layout.add_widget(button)
 
+        self.developer_label = Label(
+            text='All Rights Reserved © 2023 by Python Pokemon',
+            size_hint=(1, None),
+            height=30,
+            halign='center',
+            valign='middle'
+        )
+        self.layout.add_widget(self.developer_label)
+        
         return self.layout
-
-    def change_category(self, spinner, text):
-        self.current_category_index = self.categories.index(next(category for category in self.categories if category['name'] == text))
-        self.current_question_index = 0
-        self.update_question_ui()
-
-    def update_question_ui(self):
-        self.question_label.text = self.categories[self.current_category_index]['questions'][self.current_question_index]['question']
-        for i, choice in enumerate(self.categories[self.current_category_index]['questions'][self.current_question_index]['choices']):
-            self.choice_buttons[i].text = choice
-
-    def check_answer(self, button):
-        correct_choice = self.categories[self.current_category_index]['questions'][self.current_question_index]['correct_choice']
-        chosen_choice = self.categories[self.current_category_index]['questions'][self.current_question_index]['choices'].index(button.text)
-
-        if chosen_choice == correct_choice:
-            self.correct_answers += 1
-            self.question_label.text = "Correct!"
-        else:
-            self.question_label.text = "Incorrect. The correct answer is: " + self.categories[self.current_category_index]['questions'][self.current_question_index]['choices'][correct_choice]
-
-        self.next_question()
-
-    def next_question(self):
-        self.current_question_index = (self.current_question_index + 1) % len(self.categories[self.current_category_index]['questions'])
-        if self.current_question_index == 0:
-            self.calculate_percentage()
-        self.update_question_ui()
-
-    def calculate_percentage(self):
-        total_questions = len(self.categories[self.current_category_index]['questions'])
-        percentage_correct = (self.correct_answers / total_questions) * 100
-        print(f"You answered {self.correct_answers} out of {total_questions} questions correctly in {self.categories[self.current_category_index]['name']}.")
-        print(f"Percentage: {percentage_correct}%")
+    
+    def show_category_vocabulary(self, instance):
+        self.layout.clear_widgets()
+        category = int(instance.text.split()[-1])
+        
+        category_label = Label(text=f'Lernfeld {category} Fragen', size_hint=(1, None), height=50)
+        self.layout.add_widget(category_label)
+        
+        scroll_view = ScrollView()
+        layout_inside_scroll = BoxLayout(orientation='vertical', spacing=10, padding=10)
+        
+        for word, definition in vocabulary[category]:
+            word_label = Label(text=f'{word}: {definition}', size_hint_y=None, height=40, valign='middle')
+            layout_inside_scroll.add_widget(word_label)
+        
+        scroll_view.add_widget(layout_inside_scroll)
+        self.layout.add_widget(scroll_view)
+        
+        back_button = Button(text='Zurück', size_hint=(1, None), height=50)
+        back_button.bind(on_press=self.go_back)
+        self.layout.add_widget(back_button)
+    
+    def go_back(self, instance):
+        self.layout.clear_widgets()
+        for button in self.category_buttons:
+            self.layout.add_widget(button)
 
 if __name__ == '__main__':
-    LearningApp().run()
+    VocabularyApp().run()
